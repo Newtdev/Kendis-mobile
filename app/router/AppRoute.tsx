@@ -1,16 +1,15 @@
 import React from 'react';
 
-import {Text} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Onboarding} from '../screens';
+import {Route} from './Route';
 
 const {Navigator, Screen} = createNativeStackNavigator();
 
-const Home = () => <Text>Home Screen</Text>;
-
 export default function AppRoute() {
   return (
-    <Navigator>
-      <Screen name="Home" component={Home} />
+    <Navigator screenOptions={{headerShown: false}}>
+      <Screen name={Route.ONBOARDING} component={Onboarding} />
     </Navigator>
   );
 }

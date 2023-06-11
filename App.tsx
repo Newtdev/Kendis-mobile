@@ -6,23 +6,10 @@
  */
 
 import React from 'react';
-
-import {SafeAreaView, Text, View} from 'react-native';
 import CustomNavigation from './app/router';
 
-// type SectionProps = PropsWithChildren<{
-//   title: string;
-// }>;
-
 function App(): JSX.Element {
-  return (
-    <SafeAreaView>
-      <View className="bg-yellow-900 h-screen w-screen">
-        <Text>Hello</Text>
-      </View>
-      <CustomNavigation />
-    </SafeAreaView>
-  );
+  return <CustomNavigation />;
 }
 
 export default App;
