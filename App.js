@@ -8,7 +8,7 @@
 import React from 'react';
 import CustomNavigation from './app/router';
 
-function App(): JSX.Element {
+function App() {
   return <CustomNavigation />;
 }
 

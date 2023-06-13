@@ -8,8 +8,11 @@ module.exports = {
       //   serif: ['Merriweather', 'serif'],
       // },
       colors: {
-        darkGray: '#3A3A3A',
-        base: '#FF8B00',
+        primary: '#FC6B10',
+        secondary: '#3A3A3A',
+        lightGray: '#C4C4C4',
+        darkBlue: '#2E63EA',
+        lightBlue: 'rgba(46, 99, 234, 0.5)',
         //   // purple: '#7e5bef',
         //   // pink: '#ff49db',
         //   // orange: '#ff7849',
