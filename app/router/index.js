@@ -3,10 +3,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import AuthRoute from './AuthRoute';
 import AppRoute from './AppRoute';
 
-export default function CustomNavigation() {
+export default function CustomNavigation({theme}) {
   let a = 'auth';
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme}>
       <AppRoute />
       {/* {a !== 'auth' ? <AuthRoute /> : <AppRoute />} */}
     </NavigationContainer>

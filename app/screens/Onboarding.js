@@ -4,10 +4,8 @@ import Background from '../assets/Background.png';
 import {
   Animated,
   FlatList,
-  Image,
   ImageBackground,
   SafeAreaView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   useWindowDimensions,
@@ -177,6 +175,7 @@ export default function Onboarding() {
           </G>
         </Svg>
         <View className="w-full mb-3">
+          <Button>siodosi</Button>
           {currentIndex !== 2 ? (
             <TouchableOpacity onPress={() => console.log('HI')}>
               <Text className="font-bold text-base text-primary text-center">
