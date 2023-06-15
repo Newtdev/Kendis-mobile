@@ -1,6 +1,10 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, ScrollView} from 'react-native';
 
 export default function ScreenWrapper({children}) {
-  return <SafeAreaView>{children}</SafeAreaView>;
+  return (
+    <SafeAreaView>
+      <ScrollView showsVerticalScrollIndicator={false}>{children}</ScrollView>
+    </SafeAreaView>
+  );
 }

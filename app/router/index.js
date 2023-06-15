@@ -7,8 +7,7 @@ export default function CustomNavigation({theme}) {
   let a = 'auth';
   return (
     <NavigationContainer theme={theme}>
-      <AppRoute />
-      {/* {a !== 'auth' ? <AuthRoute /> : <AppRoute />} */}
+      {a !== 'auth' ? <AuthRoute /> : <AppRoute />}
     </NavigationContainer>
   );
 }

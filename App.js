@@ -53,11 +53,11 @@ function App() {
   const theme = colorScheme === 'dark' ? combineDarkTheme : combineLightTheme;
   return (
     <Provider store={store}>
-      {/* <PersistGate loading={null} persistor={persistor}> */}
-      <PaperProvider theme={theme}>
-        <CustomNavigation theme={theme} />
-      </PaperProvider>
-      {/* </PersistGate> */}
+      <PersistGate loading={null} persistor={persistor}>
+        <PaperProvider theme={theme}>
+          <CustomNavigation theme={theme} />
+        </PaperProvider>
+      </PersistGate>
     </Provider>
   );
 }

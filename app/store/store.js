@@ -1,28 +1,10 @@
-// import {configureStore} from '@reduxjs/toolkit';
-// import {persistStore} from 'redux-persist';
-import {rootReducer} from './reducer';
-
+import {persistedReducer, rootReducer} from './reducer';
 import {configureStore} from '@reduxjs/toolkit';
 import {apiSlice} from 'config/apiSetup';
-
-// import {persistReducer} from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
-
-// const persistConfig = {
-//   key: 'root',
-//   storage,
-// };
-
-// // const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-// // export const store = configureStore({
-// //   persistedReducer,
-// // });
-
-// // export const persistor = persistStore(store);
+import {persistStore} from 'redux-persist';
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({serializableCheck: false}).concat(
       apiSlice.middleware,
@@ -30,3 +12,5 @@ export const store = configureStore({
 
   devTools: true,
 });
+
+export const persistor = persistStore(store);
