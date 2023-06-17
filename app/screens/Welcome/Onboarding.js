@@ -18,7 +18,7 @@ import Onboarding1 from '../assets/Onboarding1.svg';
 import Onboarding2 from '../assets/Onboarding2.svg';
 import Onboarding3 from '../assets/Onboarding3.svg';
 import {Button} from 'react-native-paper';
-import {COLORS} from '../constant/Color';
+import {COLORS} from '../../constant/Color';
 import {useNavigation} from '@react-navigation/native';
 import {Route} from 'constant/Route';
 
@@ -127,7 +127,7 @@ export default function Onboarding() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const nextPage = () => navigation.navigate(Route.LOGIN);
+  const nextPage = () => navigation.navigate(Route.WELCOME);
 
   return (
     <ImageBackground source={Background} resizeMode="cover" className="h-full">

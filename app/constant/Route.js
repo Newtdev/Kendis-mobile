@@ -1,4 +1,6 @@
 export const Route = {
   ONBOARDING: 'Onboarding',
-  LOGIN: 'Login',
+  WELCOME: 'welcome',
+  LOGIN: 'login',
+  SIGN_UP: 'sign up',
 };

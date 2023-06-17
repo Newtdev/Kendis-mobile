@@ -6,7 +6,7 @@ import FullLogo from 'assets/fullLogo.svg';
 import {Button} from 'react-native-paper';
 import {COLORS} from 'constant/Color';
 
-export default function Login() {
+export default function Welcome() {
   return (
     <ScreenWrapper>
       <StatusBar />
@@ -45,7 +45,6 @@ export default function Login() {
             </Button>
           </View>
         </View>
-        <Text>Login</Text>
       </View>
     </ScreenWrapper>
   );
