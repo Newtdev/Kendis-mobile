@@ -5,8 +5,11 @@ import AuthImage from 'assets/AuthImage.png';
 import FullLogo from 'assets/fullLogo.svg';
 import {Button} from 'react-native-paper';
 import {COLORS} from 'constant/Color';
+import {Route} from 'constant/Route';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Welcome() {
+  const navigation = useNavigation();
   return (
     <ScreenWrapper>
       <StatusBar />
@@ -33,15 +36,17 @@ export default function Welcome() {
               textColor="white"
               className="mx-auto outline outline-red-900"
               buttonColor={COLORS.primary}
-              style={{width: '80%'}}>
+              style={{width: '80%'}}
+              onPress={() => navigation.navigate(Route.SIGN_UP)}>
               Sign Up
             </Button>
             <Button
               mode="outlined"
+              onPress={() => navigation.navigate(Route.LOGIN)}
               textColor={COLORS.primary}
               className="mx-auto mt-4"
               style={{width: '80%'}}>
-              Sign Up
+              Login
             </Button>
           </View>
         </View>

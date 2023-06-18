@@ -1,13 +1,18 @@
 import React from 'react';
-import {TextInput} from 'custom-utils/CustomeInput';
-import {InputTypes} from 'helpers/alias';
+// import {TextInput} from 'custom-utils/CustomeInput';
+import {TextInput} from 'react-native-paper';
+// import {InputTypes} from 'helpers/alias';
 
 //To Contain: label,name, Formik.getProps and attr
 export const Input = props => {
   return (
-    <div>
-      <label htmlFor={props.name || props.id}>{props.label}</label>
-      <TextInput {...props} />
-    </div>
+    <TextInput
+      mode="outlined"
+      label="Outlined input"
+      placeholder="Type something"
+
+      // right={<TextInput.Affix text="/100" />}
+      // {...props}
+    />
   );
 };

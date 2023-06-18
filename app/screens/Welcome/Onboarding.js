@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-import Background from '../assets/Background.png';
+import Background from 'assets/Background.png';
 import {
   Animated,
   FlatList,
@@ -12,15 +12,16 @@ import {
   View,
 } from 'react-native';
 import Svg, {Circle, G} from 'react-native-svg';
-import Logo from '../assets/Logo.svg';
+import Logo from 'assets/Logo.svg';
 import SplashScreen from 'react-native-splash-screen';
-import Onboarding1 from '../assets/Onboarding1.svg';
-import Onboarding2 from '../assets/Onboarding2.svg';
-import Onboarding3 from '../assets/Onboarding3.svg';
+import Onboarding1 from 'assets/Onboarding1.svg';
+import Onboarding2 from 'assets/Onboarding2.svg';
+import Onboarding3 from 'assets/Onboarding3.svg';
 import {Button} from 'react-native-paper';
-import {COLORS} from '../../constant/Color';
+
 import {useNavigation} from '@react-navigation/native';
 import {Route} from 'constant/Route';
+import {COLORS} from 'constant/Color';
 
 const onboardingData = [
   {
