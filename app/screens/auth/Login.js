@@ -8,9 +8,10 @@ import mealImage from 'assets/mealImage.png';
 import {useFormik} from 'formik';
 import {COLORS} from 'constant/Color';
 import * as Yup from 'yup';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon, {Icons} from 'components/Icons';
+import AuthWrapper from 'components/AuthWrapper';
+import {Route} from 'constant/Route';
 
-const myIcon = <Icon name="rocket" size={30} color="#900" />;
 const inputData = [
   {
     name: 'email',
@@ -24,7 +25,21 @@ const inputData = [
     placeholder: 'Enter your password',
     label: 'Password',
     keyboardType: 'default',
-    right: <TextInput.Affix />,
+    right: <TextInput.Icon icon="eye" />,
+  },
+];
+const AuthOptions = [
+  {
+    name: 'ios-logo-google',
+    type: Icons.Ionicons,
+    color: COLORS.secondary,
+    size: 27,
+  },
+  {
+    name: 'ios-logo-apple',
+    type: Icons.Ionicons,
+    color: COLORS.secondary,
+    size: 27,
   },
 ];
 
@@ -41,34 +56,16 @@ export default function Login() {
     onSubmit: values => console.log(values),
   });
   return (
-    <ScreenWrapper>
+    <AuthWrapper
+      name="Sign In"
+      desc="Add your sign in details"
+      noAccount="Don't have an account?"
+      linkName="Sign up"
+      link={Route.SIGN_UP}>
       <View className="px-2">
-        <View className="bg-red-500 w-full  flex flex-row justify-between ">
-          <View>
-            <Icon name="rocket" size={30} color="#900" />
-            <FullLogo width={50} height={20} />
-            <View className="-mt-1">
-              <Text className="font-bold text-lg text-secondary mt-2">
-                Sign In
-              </Text>
-              <Text className="text-base text-secondary">
-                Add your sign in details
-              </Text>
-            </View>
-          </View>
-          <View>
-            <Image
-              source={mealImage}
-              resizeMethod="auto"
-              resizeMode="contain"
-              className="object-contain"
-            />
-          </View>
-        </View>
-
-        <View className="mt-10 h-42 flex-col justify-between">
-          {inputData.map(_v => (
-            <View>
+        <View className="mt-14 h-42 flex-col justify-between">
+          {inputData.map((_v, i) => (
+            <View key={i}>
               <TextInput
                 mode="outlined"
                 outlineStyle={{borderRadius: 6}}
@@ -76,7 +73,7 @@ export default function Login() {
                 onBlur={e => console.log(e)}
                 label={_v.label}
                 onChangeText={text => Formik.setFieldValue(_v.name, text)}
-                // right: null
+                right={_v.right}
                 keyboardType={_v.keyboardType}
                 error={Formik.errors[_v.name]}
               />
@@ -105,13 +102,16 @@ export default function Login() {
         <View className="mx-auto mt-10">
           <Text className="text-secondary"> or Sign In With</Text>
         </View>
-        <Surface>
-          <Text>Google</Text>
-        </Surface>
-        <Surface>
-          <Text>App</Text>
-        </Surface>
+        <View className="flex flex-row items-center h-36 justify-center w-full">
+          {AuthOptions.map((_v, i) => (
+            <TouchableOpacity key={i}>
+              <Surface className="p-4 w-14 mx-2 bg-white rounded-xl">
+                <Icon {..._v} />
+              </Surface>
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
-    </ScreenWrapper>
+    </AuthWrapper>
   );
 }
