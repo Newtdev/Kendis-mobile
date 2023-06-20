@@ -85,7 +85,7 @@ export default function SigUp() {
                 mode="outlined"
                 outlineStyle={{borderRadius: 6}}
                 placeholder={_v.placeholder}
-                onBlur={e => Formik.setFieldValue(_v.name, e.target)}
+                // onBlur={e => Formik.setFieldValue(_v.name, e.target)}
                 label={_v.label}
                 onChangeText={text => Formik.setFieldValue(_v.name, text)}
                 right={_v.right}

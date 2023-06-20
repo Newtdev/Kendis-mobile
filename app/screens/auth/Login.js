@@ -1,10 +1,7 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import ScreenWrapper from 'components/ScreenWrapper';
-import {Input} from 'components/Input';
+
 import {Button, Surface, TextInput} from 'react-native-paper';
-import FullLogo from 'assets/fullLogo.svg';
-import mealImage from 'assets/mealImage.png';
 import {useFormik} from 'formik';
 import {COLORS} from 'constant/Color';
 import * as Yup from 'yup';
@@ -70,7 +67,7 @@ export default function Login() {
                 mode="outlined"
                 outlineStyle={{borderRadius: 6}}
                 placeholder={_v.placeholder}
-                onBlur={e => console.log(e)}
+                // onBlur={e => console.log(e)}
                 label={_v.label}
                 onChangeText={text => Formik.setFieldValue(_v.name, text)}
                 right={_v.right}
