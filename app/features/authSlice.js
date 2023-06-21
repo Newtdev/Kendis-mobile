@@ -2,6 +2,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {AuthApiSlice} from 'apis/authApiSlice';
 import {setItem} from 'helpers/utils';
+import {hideOnboarding} from 'screens/Welcome/Onboarding';
 // import {settingsAPISlice} from 'src/api/setttingsApislice';
 // import {loginResponseType} from 'src/helpers/alias';
 // import {KEYS} from 'src/helpers/Constant';
@@ -14,10 +15,10 @@ export const authSlice = createSlice({
   initialState: {
     user: null,
     token: null,
+    hideOnboardingPage: false,
   },
   reducers: {
     setCredentials: (state, action) => {
-      console.log(action.payload);
       //   state.systemAdmin = action.payload.user;
       //   state.token.accessToken = action.payload?.token;
       //   state.token.refreshToken = action.payload?.token?.refreshToken;
@@ -33,6 +34,9 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: builder => {
+    builder.addCase(hideOnboarding, (state, action) => {
+      state.hideOnboardingPage = action.payload;
+    });
     builder.addMatcher(
       AuthApiSlice.endpoints.login.matchFulfilled,
       (state, action) => {
@@ -50,5 +54,4 @@ export default authSlice.reducer;
 export const selectCurrentLoginToken = state => state.auth.token;
 
 export const selectCurrentLoginUser = state => state.auth.user;
-// // export const selectRefreshToken = (state) =>
-// // 	state.authSlice.token.refreshToken;
+export const showOnboarding = state => state.auth.hideOnboardingPage;

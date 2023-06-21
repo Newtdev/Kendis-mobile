@@ -22,6 +22,10 @@ import {Button} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 import {Route} from 'constant/Route';
 import {COLORS} from 'constant/Color';
+import {setItem} from 'helpers/utils';
+import {Keys} from 'constant/keys';
+import {createAction} from '@reduxjs/toolkit';
+import {useDispatch} from 'react-redux';
 
 const onboardingData = [
   {
@@ -80,6 +84,10 @@ const RenderOnboardingList = props => {
   );
 };
 
+// CREATE ACTION TO STORE THE STATE OF ONBOARDING
+
+export const hideOnboarding = createAction(Keys.ONBOARDING);
+
 export default function Onboarding() {
   const slideRef = useRef(null);
   const navigation = useNavigation();
@@ -127,8 +135,12 @@ export default function Onboarding() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const dispatch = useDispatch();
 
-  const nextPage = () => navigation.navigate(Route.WELCOME);
+  const nextPage = () => {
+    dispatch(hideOnboarding(true));
+    navigation.navigate(Route.WELCOME);
+  };
 
   return (
     <ImageBackground source={Background} resizeMode="cover" className="h-full">

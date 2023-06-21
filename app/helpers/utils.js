@@ -6,9 +6,9 @@ export const formatCurrency = amount => {
   return currencyjs(amount || 0, {symbol: 'N'}).format();
 };
 
-export const setItem = async (type, key, value) => {
+export const setItem = async (key, value) => {
   try {
-    if (typeof type !== 'object') {
+    if (typeof value !== 'object') {
       await AsyncStorage.setItem(key, value);
     } else {
       const jsonData = JSON.stringify(value);
@@ -23,6 +23,7 @@ export const setItem = async (type, key, value) => {
 export const getItem = async key => {
   try {
     const value = await AsyncStorage.getItem(key);
+
     if (value !== null) {
       return value;
     }
