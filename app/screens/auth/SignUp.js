@@ -7,6 +7,9 @@ import * as Yup from 'yup';
 import Icon, {Icons} from 'components/Icons';
 import AuthWrapper from 'components/AuthWrapper';
 import {Route} from 'constant/Route';
+import {useSignUpMutation} from 'apis/authApiSlice';
+import {showMessage} from 'react-native-flash-message';
+import {useNavigation} from '@react-navigation/native';
 
 const inputData = [
   {
@@ -62,14 +65,37 @@ const SigUpSchema = Yup.object({
     .oneOf([Yup.ref('password')], 'Passwords must match')
     .required(),
 });
-export default function SigUp() {
+
+export default function SignUp() {
+  const [signUp, SignUPResult] = useSignUpMutation();
+  const navigation = useNavigation();
+
   const Formik = useFormik({
     initialValues: {email: '', password: ''},
     validateOnBlur: true,
     validateOnChange: true,
     validationSchema: SigUpSchema,
-    onSubmit: values => console.log(values),
+    onSubmit: values => {
+      handleRequest(values);
+    },
   });
+
+  async function handleRequest(values) {
+    const result = await signUp(values).unwrap();
+    Formik.resetForm();
+    if (result.error) {
+      showMessage({
+        message: result?.error?.message,
+        type: 'danger',
+      });
+    } else {
+      navigation.navigate(Route.LOGIN);
+      showMessage({
+        message: 'Sign up successful! Login with your credentials',
+        type: 'success',
+      });
+    }
+  }
   return (
     <AuthWrapper
       name="Sign Up"
@@ -85,7 +111,7 @@ export default function SigUp() {
                 mode="outlined"
                 outlineStyle={{borderRadius: 6}}
                 placeholder={_v.placeholder}
-                // onBlur={e => Formik.setFieldValue(_v.name, e.target)}
+                // onBlur={Formik.handleBlur(`${_v.name}`)}
                 label={_v.label}
                 onChangeText={text => Formik.setFieldValue(_v.name, text)}
                 right={_v.right}
@@ -103,6 +129,8 @@ export default function SigUp() {
             mode="contained"
             textColor="white"
             className="mx-auto outline mt-auto"
+            loading={SignUPResult.isLoading}
+            disabled={SignUPResult.isLoading}
             buttonColor={COLORS.primary}
             style={{width: '80%'}}
             onPress={Formik.handleSubmit}

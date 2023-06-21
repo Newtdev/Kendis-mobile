@@ -2,12 +2,13 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import AuthRoute from './AuthRoute';
 import AppRoute from './AppRoute';
+import useAuthUser from 'hooks/useAuthUser';
 
 export default function CustomNavigation({theme}) {
-  let a = 'auth';
+  const {user} = useAuthUser();
   return (
     <NavigationContainer theme={theme}>
-      {a !== 'auth' ? <AuthRoute /> : <AppRoute />}
+      {user ? <AuthRoute /> : <AppRoute />}
     </NavigationContainer>
   );
 }

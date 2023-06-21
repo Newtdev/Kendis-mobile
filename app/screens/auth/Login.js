@@ -8,6 +8,10 @@ import * as Yup from 'yup';
 import Icon, {Icons} from 'components/Icons';
 import AuthWrapper from 'components/AuthWrapper';
 import {Route} from 'constant/Route';
+import {useLoginMutation} from 'apis/authApiSlice';
+import {showMessage} from 'react-native-flash-message';
+import {useDispatch, useSelector} from 'react-redux';
+import {selectCurrentLoginUser, setCredentials} from 'features/authSlice';
 
 const inputData = [
   {
@@ -45,13 +49,34 @@ const LoginSchema = Yup.object({
   password: Yup.string().min(8).required(),
 });
 export default function Login() {
+  const [LoginRequest, LoginResult] = useLoginMutation();
   const Formik = useFormik({
     initialValues: {email: '', password: ''},
     validateOnBlur: true,
     validateOnChange: true,
     validationSchema: LoginSchema,
-    onSubmit: values => console.log(values),
+    onSubmit: values => handleRequest(values),
   });
+  const dispatch = useDispatch();
+  async function handleRequest(values) {
+    const result = await LoginRequest(values).unwrap();
+    dispatch(setCredentials({user: 'hello'}));
+    // console.log(result);
+    // Formik.resetForm();
+    if (result.error) {
+      showMessage({
+        message: result?.error?.message,
+        type: 'danger',
+      });
+    } else {
+      // navigation.navigate(Route.LOGIN);
+      showMessage({
+        message: 'Sign up successful! Login with your credentials',
+        type: 'success',
+      });
+    }
+  }
+
   return (
     <AuthWrapper
       name="Sign In"
@@ -68,6 +93,7 @@ export default function Login() {
                 outlineStyle={{borderRadius: 6}}
                 placeholder={_v.placeholder}
                 // onBlur={e => console.log(e)}
+                // onFocus={()=>Formik.handle}
                 label={_v.label}
                 onChangeText={text => Formik.setFieldValue(_v.name, text)}
                 right={_v.right}
@@ -91,6 +117,8 @@ export default function Login() {
             buttonColor={COLORS.primary}
             style={{width: '80%'}}
             onPress={Formik.handleSubmit}
+            loading={LoginResult.isLoading}
+            disabled={LoginResult.isLoading}
             // onPress={() => navigation.navigate(Route.SIGN_UP)}
           >
             Sign In

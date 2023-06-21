@@ -1,4 +1,8 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import {
+  createApi,
+  fakeBaseQuery,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: '/',
@@ -29,9 +33,6 @@ const extendedBaseQuery = async (args, api, extraOptions) => {
 
 export const apiSlice = createApi({
   reducerPath: 'kendis-api',
-  baseQuery: extendedBaseQuery,
-  endpoints: builder => ({
-    registerUser: builder.mutation({}),
-    login: builder.mutation({}),
-  }),
+  baseQuery: fakeBaseQuery(),
+  endpoints: builder => ({}),
 });
